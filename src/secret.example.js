@@ -1,0 +1,2 @@
+// CREA POR FAVOR UN ARCHIVO secret.js CON TU API KEY
+const API_KEY = 'AQUI VA TU KEY';
