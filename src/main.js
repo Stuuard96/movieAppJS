@@ -9,11 +9,9 @@ const api = axios.create({
 async function getTrendingMoviesPreview() {
   const { data } = await api('trending/movie/day');
   const movies = data.results;
+  trendingMoviesPreviewList.innerHTML = '';
 
   movies.map((movie) => {
-    const trendingPreviewMoviesContainer = document.querySelector(
-      '#trendingPreview .trendingPreview-movieList'
-    );
     const movieContainer = document.createElement('div');
     movieContainer.classList.add('movie-container');
     const movieImg = document.createElement('img');
@@ -24,18 +22,16 @@ async function getTrendingMoviesPreview() {
       'https://image.tmdb.org/t/p/w500' + movie.poster_path
     );
     movieContainer.appendChild(movieImg);
-    trendingPreviewMoviesContainer.appendChild(movieContainer);
+    trendingMoviesPreviewList.appendChild(movieContainer);
   });
 }
 
 async function getCategoriesPreview() {
   const { data } = await api('genre/movie/list');
   const categories = data.genres;
+  categoriesPreviewList.innerHTML = '';
 
   categories.map((category) => {
-    const categoriesPreviewContainer = document.querySelector(
-      '#categoriesPreview .categoriesPreview-list'
-    );
     const categoryContainer = document.createElement('div');
     categoryContainer.classList.add('category-container');
     const categoryTitle = document.createElement('h3');
@@ -43,7 +39,34 @@ async function getCategoriesPreview() {
     categoryTitle.setAttribute('id', 'id' + category.id);
     const categoryTitleText = document.createTextNode(category.name);
     categoryTitle.appendChild(categoryTitleText);
+    categoryTitle.addEventListener('click', () => {
+      location.hash = `category=${category.id}-${category.name}`;
+    });
     categoryContainer.appendChild(categoryTitle);
-    categoriesPreviewContainer.appendChild(categoryContainer);
+    categoriesPreviewList.appendChild(categoryContainer);
+  });
+}
+
+async function getMoviesByCategory(categoryId) {
+  const { data } = await api('discover/movie', {
+    params: {
+      with_genres: categoryId,
+    },
+  });
+  const movies = data.results;
+  genericSection.innerHTML = '';
+
+  movies.map((movie) => {
+    const movieContainer = document.createElement('div');
+    movieContainer.classList.add('movie-container');
+    const movieImg = document.createElement('img');
+    movieImg.classList.add('movie-img');
+    movieImg.setAttribute('alt', movie.title);
+    movieImg.setAttribute(
+      'src',
+      'https://image.tmdb.org/t/p/w500' + movie.poster_path
+    );
+    movieContainer.appendChild(movieImg);
+    genericSection.appendChild(movieContainer);
   });
 }
