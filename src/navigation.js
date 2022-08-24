@@ -1,6 +1,5 @@
 searchFormBtn.addEventListener('click', () => {
-  // location.hash = '#search=' + searchFormInput.value;
-  location.hash = '#search=';
+  location.hash = '#search=' + searchFormInput.value;
 });
 
 trendingBtn.addEventListener('click', () => {
@@ -8,16 +7,22 @@ trendingBtn.addEventListener('click', () => {
 });
 
 arrowBtn.addEventListener('click', () => {
-  // history.back();
-  location.hash = '#home';
+  history.back();
+  // location.hash = '#home';
 });
 
+window.addEventListener(
+  'DOMContentLoaded',
+  () => {
+    navigator();
+    window.history.pushState({ loadUrl: window.location.href }, null, '');
+  },
+  false
+);
 window.addEventListener('DOMContentLoaded', navigator, false);
 window.addEventListener('hashchange', navigator, false);
 
 function navigator() {
-  console.log({ location });
-
   if (location.hash.startsWith('#trends')) {
     trendsPage();
   } else if (location.hash.startsWith('#search=')) {
@@ -29,11 +34,12 @@ function navigator() {
   } else {
     homePage();
   }
+  window.scrollTo(0, 0);
+  // let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+  // scrollTop = 0;
 }
 
 function homePage() {
-  console.log('HOME!!!');
-
   headerSection.classList.remove('header-container--long');
   headerSection.style.background = '';
   arrowBtn.classList.add('inactive');
@@ -51,8 +57,6 @@ function homePage() {
 }
 
 function trendsPage() {
-  console.log('TRENDS!!!');
-
   headerSection.classList.remove('header-container--long');
   headerSection.style.background = '';
   arrowBtn.classList.remove('inactive');
@@ -64,27 +68,31 @@ function trendsPage() {
   categoriesPreviewSection.classList.add('inactive');
   genericSection.classList.remove('inactive');
   movieDetailSection.classList.add('inactive');
+
+  headerCategoryTitle.innerHTML = 'Tendencias';
+
+  getTrendingMovies();
 }
 
 function searchPage() {
-  console.log('SEARCH!!!');
-
   headerSection.classList.remove('header-container--long');
   headerSection.style.background = '';
   arrowBtn.classList.remove('inactive');
   arrowBtn.classList.remove('header-arrow--white');
   headerTitle.classList.add('inactive');
-  headerCategoryTitle.classList.remove('inactive');
+  headerCategoryTitle.classList.add('inactive');
   searchForm.classList.remove('inactive');
   trendingPreviewSection.classList.add('inactive');
   categoriesPreviewSection.classList.add('inactive');
   genericSection.classList.remove('inactive');
   movieDetailSection.classList.add('inactive');
+
+  // ['#search=', 'Goku']
+  const [_, searchQuery] = location.hash.split('=');
+  getMoviesBySearch(searchQuery);
 }
 
 function movieDetailsPage() {
-  console.log('MOVIE!!!');
-
   headerSection.classList.add('header-container--long');
   // headerSection.style.background = '';
   arrowBtn.classList.remove('inactive');
@@ -100,8 +108,6 @@ function movieDetailsPage() {
 }
 
 function categoriesPage() {
-  console.log('CATEGORY!!!');
-
   headerSection.classList.remove('header-container--long');
   headerSection.style.background = '';
   arrowBtn.classList.remove('inactive');
@@ -119,5 +125,6 @@ function categoriesPage() {
   // ['id', 'name'];
   const [categoryId, categoryName] = categoryInfo.split('-');
   headerCategoryTitle.innerHTML = categoryName;
+
   getMoviesByCategory(categoryId);
 }

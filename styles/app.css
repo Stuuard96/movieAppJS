@@ -311,20 +311,16 @@ footer {
 
 /* Generic List (search, trending & category) */
 .genericList-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  line-height: 0;
   padding: 32px 24px;
-}
-
-.genericList-container .movie-container {
-  display: inline-block;
-  width: 47.5%;
 }
 
 .genericList-container .movie-img {
   width: 100%;
+  height: 100%;
 }
 
 /* Movie Detail */
