@@ -25,7 +25,7 @@
 
 html {
   box-sizing: border-box;
-  background-color: var(--purple-medium-3);
+  /* background-color: var(--purple-medium-3); */
 }
 
 *,
@@ -40,6 +40,7 @@ body {
   font-family: var(--font-family-text);
   font-weight: var(--font-weight-text1);
   margin: 0;
+  margin: 0 auto;
 }
 
 h1,
@@ -52,7 +53,7 @@ h3 {
 h1,
 h2 {
   font-size: 24px;
-  color: var(--purple-dark-2);
+  color: var(--purple-light-1);
   font-family: var(--font-family-titles);
   font-weight: var(--font-weight-title1);
   margin: 0;
@@ -94,9 +95,18 @@ button {
 }
 
 /* Shared */
-.header-container,
-.trendingPreview-header,
-.categoriesPreview-container {
+.header-content,
+.trendingPreview-content,
+.categoriesPreview-content,
+.genericList-content,
+.movieDetail-content {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.header-content,
+.trendingPreview-content,
+.categoriesPreview-content {
   padding: 0 24px;
 }
 
@@ -113,6 +123,8 @@ footer {
 
 .movie-container {
   cursor: pointer;
+  max-width: 300px;
+  margin: 0 auto;
 }
 
 .movie-img {
@@ -121,27 +133,27 @@ footer {
 
 .categoriesPreview-list,
 .categories-list {
-  display: flex;
+  /* display: flex;
   align-items: center;
   justify-content: space-between;
   position: relative;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 }
 
 /* Header */
+.header-content {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
 .header-container {
-  padding-top: 40px;
+  background: var(--purple-dark-2);
 }
 
 .header-container--long {
-  background-image: url('https://pics.filmaffinity.com/Deadpool-777527803-large.jpg');
-  background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.35) 19.27%,
-      rgba(0, 0, 0, 0) 29.17%
-    ),
-    url(https://pics.filmaffinity.com/Deadpool-777527803-large.jpg);
-  background-size: cover !important;
+  background-size: cover;
   height: 480px;
   position: fixed;
   top: 0;
@@ -158,6 +170,11 @@ footer {
 
 .header-title {
   margin-bottom: 16px;
+}
+
+.header-title--style {
+  padding-top: 15px;
+  float: right;
 }
 
 .header-arrow {
@@ -210,7 +227,6 @@ footer {
   overflow-y: hidden;
   white-space: nowrap;
   height: 241px;
-  padding-left: 24px;
   padding-bottom: 16px;
 }
 
@@ -229,9 +245,9 @@ footer {
 }
 
 /* Categories */
-.category-container {
+/* .category-container {
   width: 45%;
-}
+} */
 
 .category-title {
   margin-bottom: 8px;
@@ -310,7 +326,7 @@ footer {
 }
 
 /* Generic List (search, trending & category) */
-.genericList-container {
+.genericList-content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
@@ -327,15 +343,22 @@ footer {
 .movieDetail-container {
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  padding: 32px 24px;
+
   margin-top: 403px;
   z-index: 1;
   position: absolute;
+  left: 0;
+  right: 0;
   background-color: var(--purple-light-1);
+}
+
+.movieDetail-content {
+  padding: 32px 24px;
 }
 
 .movieDetail-title {
   display: inline-block;
+  color: #5c218a;
   width: 80%;
   margin: 0 0 16px 0;
   padding: 0;
@@ -367,11 +390,11 @@ footer {
 }
 
 .relatedMovies-scrollContainer {
-  position: absolute;
+  /* position: absolute; */
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
-  width: calc(100vw - 24px);
+  /* width: calc(100vw - 24px); */
   padding-bottom: 16px;
 }
 
@@ -391,10 +414,24 @@ footer {
 
 /* Footer */
 footer {
-  background-color: var(--purple-medium-3);
+  background-color: var(--purple-dark-2);
   color: var(--purple-light-2);
   text-align: center;
 }
+
+.footer-content {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+/************** Buscar fallas de desbordamiento *************/
+/* * {
+  background: #000 !important;
+  color: #0f0 !important;
+  outline: solid #f00 1px !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+} */
 
 footer p {
   margin: 0;
