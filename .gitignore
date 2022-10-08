@@ -104,4 +104,4 @@ dist
 .tern-port
 
 # Secret key used by Stuard
-src/secret.js
+# src/secret.js
