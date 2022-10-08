@@ -1,6 +1,6 @@
 # MovieAppJs
 La siguiente aplicación fue realizada como parte del
-curso proporcionado por Juan David Castro Gallego - Platzi.
+curso proporcionado por Juan David Castro Gallego - Platzi.  
 https://platzi.com/cursos/api-practico/
 
 ## Descripción
