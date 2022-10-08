@@ -8,7 +8,7 @@ Esta aplicación cuenta con un header, sección de buscar pelicualas, categorias
 esta especialmente realizado a reforzar los conocimientos de Javascript consumo de API REST.
 
 ## Link del proyecto
-https://gridcss-news.netlify.app/
+https://movie-appjs.netlify.app/
 
 ## Funcionalidades
 - Header, footer, sección de categorias, tendencias, descripcióm.
